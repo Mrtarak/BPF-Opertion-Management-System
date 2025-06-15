@@ -326,6 +326,19 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                    <!-- back button -->
+                     <button class="btn btn-secondary mb-3" onclick="window.history.back()">
+                      <i class="mdi mdi-arrow-left"></i> Back
+                    </button>
+                    <!-- breadcrumb navigation -->
+                    <nav aria-label="breadcrumb" class="mb-3">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item">Manage Users</li>
+                        <li class="breadcrumb-item active" aria-current="page">Vijetaas</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Vijetaas Student</li>
+                      </ol>
+                    </nav>
                     <h4 class="card-title"> Vijetaas Student</h4>
                     <p class="card-description">Add Vijetaas Student </p>
                     <form class="forms-sample">
@@ -436,17 +449,7 @@
                               <option>xyz</option>
                             </select>
                           </div>
-                          <div class="col-md-6 form-group">
-                              <label>Program</label>
-                              <select class="form-select">
-                                <option>Select Program</option>
-                                <option>Vijetaas</option>
-                                <option>Doosra Mauka</option>
-                                <option>Digital Shakti</option>
-                                <option>Learning Adda</option>
-                              </select>
-                            </div>
-                          </div>
+                          
 
                           <!-- Section: Joining & Uploads -->
                           <h4 class="mt-4 mb-3">Joining Details & Uploads</h4>
@@ -476,8 +479,8 @@
 
                           <!-- Submit Buttons -->
                           <div class="mt-4">
-                            <button type="reset" class="btn btn-light">Reset</button>
-                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <button type="reset" class="btn btn-light">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-2">Save</button>
                           </div>
                         </form>
                   </div>

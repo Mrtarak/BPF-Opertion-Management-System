@@ -326,6 +326,19 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                    <!-- back button -->
+                     <button class="btn btn-secondary mb-3" onclick="window.history.back()">
+                      <i class="mdi mdi-arrow-left"></i> Back
+                    </button>
+                    <!-- breadcrumb navigation -->
+                    <nav aria-label="breadcrumb" class="mb-3">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item">Manage Users</li>
+                        <li class="breadcrumb-item active" aria-current="page">Digital-Shakti</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Digital-Shakti Student</li>
+                      </ol>
+                    </nav>
                     <h4 class="card-title"> Digital Shakti Student</h4>
                     <p class="card-description">Edit Digital Shakti Student </p>
                     <form class="forms-sample">
@@ -498,8 +511,8 @@
 
                           <!-- Submit Buttons -->
                           <div class="mt-4">
-                            <button type="cancel" class="btn btn-light">Cancel</button>
-                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <a href="../../students/digital_shakti.html" class="btn btn-light">Cancel</a>
+                            <a href="../../students/digital_shakti.html" class="btn btn-primary me-2">Save</a>
                           </div>
                         </form>
                   </div>

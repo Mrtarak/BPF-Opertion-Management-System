@@ -326,6 +326,19 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                    <!-- back button -->
+                     <button class="btn btn-secondary mb-3" onclick="window.history.back()">
+                      <i class="mdi mdi-arrow-left"></i> Back
+                    </button>
+                    <!-- breadcrumb navigation -->
+                    <nav aria-label="breadcrumb" class="mb-3">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../../index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item">Manage Users</li>
+                        <li class="breadcrumb-item active" aria-current="page">Learning-Adda</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Learning-Adda Student</li>
+                      </ol>
+                    </nav>
                     <h4 class="card-title"> Learning Adda Student</h4>
                     <p class="card-description">Add Learning Adda Student </p>
                     <form class="forms-sample">
@@ -516,8 +529,8 @@
 
                           <!-- Submit Buttons -->
                           <div class="mt-4">
-                            <button type="reset" class="btn btn-light">Reset</button>
-                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <button type="reset" class="btn btn-light">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-2">Save</button>
                           </div>
                         </form>
                   </div>
