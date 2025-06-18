@@ -18,7 +18,12 @@
     }
   }
 </script>    
-
+<!-- jQuery (before DataTables) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables core + Bootstrap 5 integration -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
  <!-- plugins:js -->
     <script src="<?= base_url('assets/vendors/js/vendor.bundle.base.js') ?>"></script>
     <script src="<?= base_url('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') ?>"></script>
@@ -38,5 +43,8 @@
     <script src="<?= base_url('assets/js/jquery.cookie.js') ?>" type="text/javascript"></script>
     <script src="<?= base_url('assets/js/dashboard.js') ?>"></script>
     <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?= base_url('assets/js/validations.js') ?>"></script>
+
     <!-- End custom js for this page-->
 
