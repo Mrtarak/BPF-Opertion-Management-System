@@ -1,3 +1,13 @@
+<?php if (session()->getFlashdata('errors')): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
 <?= view('includes/header'); ?>
 <?= view('includes/navbar'); ?>
 
@@ -42,17 +52,17 @@
   <div class="row">
     <div class="col-md-6 form-group">
       <label>Program Name</label>
-      <input type="text" name="Program_Name" class="form-control" value="<?= old('Program_Name') ?>" placeholder="Enter Program Name" required>
+      <input type="text" name="Program_Name" class="form-control" value="<?= old('Program_Name') ?>" placeholder="Enter Program Name" >
     </div>
 
     <div class="col-md-6 form-group">
       <label>About</label>
-      <input type="text" name="Program_About" class="form-control" value="<?= old('Program_About') ?>" placeholder="Enter About Program" required>
+      <input type="text" name="Program_About" class="form-control" value="<?= old('Program_About') ?>" placeholder="Enter About Program" >
     </div>
 
     <div class="col-md-6 form-group">
       <label>Start Date</label>
-      <input type="date" name="Program_Start_Date" class="form-control" value="<?= old('Program_Start_Date') ?>" required>
+      <input type="date" name="Program_Start_Date" class="form-control" value="<?= old('Program_Start_Date') ?>" >
     </div>
 
     <div class="col-md-6 form-group">
@@ -62,7 +72,7 @@
 
     <div class="col-md-6 form-group">
   <label>Program Theme</label>
-  <select class="form-select" name="Program_Theme_Id" required>
+  <select class="form-select" name="Program_Theme_Id" >
     <option value="">Select Theme</option>
     <option value="THEME_001" <?= old('Program_Theme_Id') == 'THEME_001' ? 'selected' : '' ?>>Employability</option>
     <option value="THEME_002" <?= old('Program_Theme_Id') == 'THEME_002' ? 'selected' : '' ?>>Education</option>
@@ -75,12 +85,12 @@
 
     <div class="col-md-6 form-group">
       <label>Applicable For</label>
-      <input type="text" name="Applicable_For" class="form-control" value="<?= old('Applicable_For') ?>" placeholder="Enter Age Group" required>
+      <input type="text" name="Applicable_For" class="form-control" value="<?= old('Applicable_For') ?>" placeholder="Enter Age Group" >
     </div>
 
     <div class="col-md-6 form-group">
       <label>Status</label>
-      <select class="form-select" name="Program_Status" required>
+      <select class="form-select" name="Program_Status" >
     <option value="">Select Status</option>
     <option value="Active" <?= old('Program_Status') == 'Active' ? 'selected' : '' ?>>Active</option>
     <option value="InActive" <?= old('Program_Status') == 'InActive' ? 'selected' : '' ?>>InActive</option>
@@ -90,7 +100,7 @@
 
     <div class="col-md-6 form-group">
       <label>Recorded By</label>
-      <input type="text" name="Rec_Added_By" class="form-control" value="<?= old('Rec_Added_By') ?>" placeholder="Enter Who Recorded Record" required>
+      <input type="text" name="Rec_Added_By" class="form-control" value="<?= old('Rec_Added_By') ?>" placeholder="Enter Who Recorded Record" >
     </div>
 
     <div class="col-md-6 form-group">
@@ -100,7 +110,7 @@
 
     <div class="col-md-6 form-group">
       <label>Updated By</label>
-      <input type="text" name="Rec_Updated_By" class="form-control" value="<?= old('Rec_Updated_By') ?>" placeholder="Enter Who Updated Record" required>
+      <input type="text" name="Rec_Updated_By" class="form-control" value="<?= old('Rec_Updated_By') ?>" placeholder="Enter Who Updated Record" >
     </div>
 
     <div class="col-md-6 form-group">
@@ -121,4 +131,5 @@
 </div>
 
 <!-- Footer scripts -->
+<script src="<?= base_url('assets/js/program-validation.js') ?>"></script>
 <?= view('includes/footer'); ?>

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\ProgramModel;
+use Config\Validation\Programvalidation;
 
 class Programs extends BaseController
 {
@@ -37,6 +38,12 @@ class Programs extends BaseController
 
     public function store()
     {
+        $validation = \Config\Services::validation();
+
+        if (!$this->validate(ProgramValidation::$programRules)){
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
         $programId = 'PROG_' . uniqid();
         if (!$this->validate([
             'Program_Name' => 'required',
@@ -79,6 +86,12 @@ class Programs extends BaseController
 
     public function update($id)
     {
+        $validation = \Config\Services::validation();
+
+        if (!$this->validate(ProgramValidation::$programRules)){
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
         if (!$this->programModel->find($id)) {
             return redirect()->to('/programs')->with('error', 'Program not found');
         }
