@@ -14,11 +14,28 @@
     <li class="nav-item"><a class="nav-link" href="<?= site_url('programs') ?>"><i class="mdi mdi-folder-multiple menu-icon"></i><span class="menu-title">Manage Programs</span></a></li>
     <li class="nav-item"><a class="nav-link" href="<?= site_url('centers') ?>"><i class="mdi mdi-map-marker-radius menu-icon"></i><span class="menu-title">Manage Centers</span></a></li>
     <li class="nav-item"><a class="nav-link" href="<?= site_url('users') ?>"><i class="mdi mdi-account-circle menu-icon"></i><span class="menu-title">Manage Users</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('roles/manage') ?>"><i class="mdi mdi-account-key menu-icon"></i><span class="menu-title">Manage Role & Rights</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('goals/types') ?>"><i class="mdi mdi-target menu-icon"></i><span class="menu-title">Manage Goal Types</span></a></li>
+    <!-- Roles & Rights -->
+     <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#rolesRights" aria-expanded="false" aria-controls="rolesRights">
+        <i class="mdi mdi-account-key menu-icon"></i>
+        <span class="menu-title">Roles & Rights</span>
+        <i class="menu-arrow"></i>
+      </a>
+     <div class="collapse" id="rolesRights">
+      <ul class="nav flex-column sub-menu">
+        <li class="nav-item">
+          <a class="nav-link" href="<?= site_url('roles/manage') ?>">Manage Roles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= site_url('rights/manage') ?>">Manage Rights</a>
+        </li>
+      </ul>
+     </div>
+        </li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals/types') ?>"><i class="mdi mdi-target menu-icon"></i><span class="menu-title">Manage Goal Types</span></a></li>
 
 
-    <!-- Programs Dynamic Dropdown (Future Ready) -->
+    <!-- Programs Dropdown -->
     <li class="nav-item nav-category">Programs</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#programsSubmenu" aria-expanded="false" aria-controls="programsSubmenu">
@@ -28,10 +45,10 @@
       </a>
       <div class="collapse" id="programsSubmenu">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('program/vijetaas') ?>">Vijetaas</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('program/doosra_mauka') ?>">Doosra Mauka Students</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('program/learning_adda') ?>">Learning Adda Students</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('program/digital_shakti') ?>">Digital Shakti Students</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/vijetaas') ?>">Vijetaas</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/doosra_mauka') ?>">Doosra Mauka Students</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/learning_adda') ?>">Learning Adda Students</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/digital_shakti') ?>">Digital Shakti Students</a></li>
         </ul>
       </div>
     </li>

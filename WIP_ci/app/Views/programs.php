@@ -34,10 +34,14 @@
                   <label for="programSelect" class="form-label">Select Program</label>
                   <select name="program_filter" id="programSelect" class="form-select" onchange="this.form.submit()">
                     <option value="">-- Select Program --</option>
-                    <option value="vijetaas" <?= (isset($_GET['program_filter']) && $_GET['program_filter'] === 'vijetaas') ? 'selected' : '' ?>>Vijetaas</option>
-                    <option value="learning_adda" <?= (isset($_GET['program_filter']) && $_GET['program_filter'] === 'learning_adda') ? 'selected' : '' ?>>Learning Adda</option>
-                    <option value="digital_shakti" <?= (isset($_GET['program_filter']) && $_GET['program_filter'] === 'digital_shakti') ? 'selected' : '' ?>>Digital Shakti</option>
-                    <option value="doosra_mauka" <?= (isset($_GET['program_filter']) && $_GET['program_filter'] === 'doosra_mauka') ? 'selected' : '' ?>>Doosra Mauka</option>
+                    <?php if (isset($programs) && is_array($programs)) : ?>
+                      <?php foreach ($programs as $program) : ?>
+                        <option value="<?= strtolower(str_replace(' ', '_', $program['Program_Name'])) ?>" 
+                          <?= (isset($_GET['program_filter']) && $_GET['program_filter'] === strtolower(str_replace(' ', '_', $program['Program_Name']))) ? 'selected' : '' ?>>
+                          <?= $program['Program_Name'] ?>
+                        </option>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
                   </select>
                 </form>
               </div>
