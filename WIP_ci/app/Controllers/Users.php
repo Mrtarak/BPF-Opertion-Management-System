@@ -55,7 +55,9 @@ public function store()
         'User_Status'         => $this->request->getPost('User_Status'),
         'Role_Id'             => $this->request->getPost('Role_Id'),
         'Program_Id'          => $this->request->getPost('Program_Id'),
+        'Record_Added_By' => $this->request->getPost('Record_Added_By'),
         'Rec_Added_On'        => date('Y-m-d'),
+        'Rec_Updated_By' => $this->request->getPost('Rec_Updated_By'),
     ];
 
     $userModel->insert($data);
