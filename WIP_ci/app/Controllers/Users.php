@@ -62,6 +62,40 @@ public function store()
     return redirect()->to(site_url('users'))->with('success', 'User added successfully.');
 }
 
+public function view($id)
+{
+    $model = new \App\Models\UserModel();
+    $data['user'] = $model->find($id);
+
+    if (!$data['user']) {
+        return redirect()->to('users')->with('error', 'User not found.');
+    }
+
+    return view('ManageUsers/view_user', $data);
+}
+
+public function edit($id)
+{
+    $model = new \App\Models\UserModel();
+    $data['user'] = $model->find($id);
+
+    if (!$data['user']) {
+        return redirect()->to('users')->with('error', 'User not found.');
+    }
+
+    return view('ManageUsers/edit_user', $data);
+}
+
+public function update($id)
+{
+    $model = new \App\Models\UserModel();
+
+    $data = $this->request->getPost(); 
+
+    $model->update($id, $data);
+
+    return redirect()->to('users')->with('success', 'User updated successfully');
+}
 
     public function delete($id)
     {
