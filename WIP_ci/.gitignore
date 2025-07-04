@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
-*.sqlite3
-
-# Virtual environment
-venv/
-.venv/
-
-# Static/Media files (if not needed)
-media/
-staticfiles/
-
-# VSCode and IDE
-.vscode/
-.idea/
-
-# Node.js
-node_modules/
-
-# Other big files
-*.mp4
-*.mkv
-*.zip
-*.tar
-*.exe
-*.iso
-=======
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
@@ -156,4 +124,34 @@ _modules/*
 
 /results/
 /phpunit*.xml
->>>>>>> 1b41af7 (Initial commit)
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.sqlite3
+
+# Virtual environment
+venv/
+.venv/
+
+# Static/Media files (if not needed)
+media/
+staticfiles/
+
+# VSCode and IDE
+.vscode/
+.idea/
+
+# Node.js
+node_modules/
+
+# Other big files
+*.mp4
+*.mkv
+*.zip
+*.tar
+*.exe
+*.iso

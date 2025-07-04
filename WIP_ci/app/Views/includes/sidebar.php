@@ -12,7 +12,7 @@
     <!-- Settings (Only for Super-Admin) -->
     <li class="nav-item nav-category">Settings (Super Admin)</li>
     <li class="nav-item"><a class="nav-link" href="<?= site_url('programs') ?>"><i class="mdi mdi-folder-multiple menu-icon"></i><span class="menu-title">Manage Programs</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('centers') ?>"><i class="mdi mdi-map-marker-radius menu-icon"></i><span class="menu-title">Manage Centers</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('center') ?>"><i class="mdi mdi-map-marker-radius menu-icon"></i><span class="menu-title">Manage Centers</span></a></li>
     <li class="nav-item"><a class="nav-link" href="<?= site_url('users') ?>"><i class="mdi mdi-account-circle menu-icon"></i><span class="menu-title">Manage Users</span></a></li>
     <!-- Roles & Rights -->
      <li class="nav-item">
@@ -32,8 +32,20 @@
       </ul>
      </div>
         </li>
-      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals/types') ?>"><i class="mdi mdi-target menu-icon"></i><span class="menu-title">Manage Goal Types</span></a></li>
-
+        <!-- Goal Types -->
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#goalMenu" aria-expanded="false" aria-controls="goalMenu">
+    <i class="mdi mdi-calendar-multiselect menu-icon"></i>
+    <span class="menu-title">Manage Goals</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="goalMenu">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals') ?>">All Goals</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals/types') ?>">Manage Goals Types</a></li>
+    </ul>
+  </div>
+</li>
 
     <!-- Programs Dropdown -->
     <li class="nav-item nav-category">Programs</li>
@@ -60,7 +72,19 @@
     <li class="nav-item"><a class="nav-link" href="<?= site_url('batches') ?>"><i class="mdi mdi-calendar-clock menu-icon"></i><span class="menu-title">Manage Batches</span></a></li>
 
     <!-- Events -->
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('events') ?>"><i class="mdi mdi-calendar-multiselect menu-icon"></i><span class="menu-title">Manage Events</span></a></li>
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#eventMenu" aria-expanded="false" aria-controls="eventMenu">
+    <i class="mdi mdi-calendar-multiselect menu-icon"></i>
+    <span class="menu-title">Manage Events</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="eventMenu">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('events/list') ?>">All Events</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('events/types') ?>">Manage Event Types</a></li>
+    </ul>
+  </div>
+</li>
 
     <!-- Finance -->
     <li class="nav-item nav-category">Manage Finance</li>
