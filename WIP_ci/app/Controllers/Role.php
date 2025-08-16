@@ -5,7 +5,8 @@ use App\Models\RoleModel;
 use CodeIgniter\Controller;
 
 class Role extends Controller {
-    public function manage() {
+
+    public function index() {
         $roleModel = new \App\Models\RoleModel();
     $builder = $roleModel->builder();
     $builder->select('ROLE_M.*, RIGHTS_M.Rights_Summary');
@@ -77,6 +78,64 @@ class Role extends Controller {
 
     $model->insert($data);
 
-    return redirect()->to(site_url('roles/manage'))->with('success', 'Role Added');
+    return redirect()->to(site_url('roles'))->with('success', 'Role Added');
 }
+
+public function edit($id)
+{
+    $roleModel = new \App\Models\RoleModel();
+    $rightsModel = new \App\Models\RightsModel();
+
+    $role = $roleModel->find($id);
+    $rights = $rightsModel->findAll(); // Fetch all available rights
+
+    if (!$role) {
+        return redirect()->to('roles')->with('error', 'Role not found.');
+    }
+
+    return view('ManageRole/edit_role', [
+        'role' => $role,
+        'rights' => $rights
+    ]);
+}
+
+public function update($id)
+    {
+        helper(['form']);
+
+        $rules = [
+            'Role_Name' => 'required|min_length[3]|max_length[100]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return view('ManageRole/edit_role', [
+                'validation' => $this->validator,
+                'role'       => ['Role_Id' => $id] + $this->request->getPost()
+            ]);
+        }
+
+        $model = new RoleModel();
+
+        $data = [
+            'Role_Name'          => $this->request->getPost('Role_Name'),
+            'Role_About'         => $this->request->getPost('Role_About'),
+            'Role_Description'   => $this->request->getPost('Role_Description'),
+            'Rec_Updated_By'     => session()->get('user_id') ?? 'system',
+            'Rec_Last_Updated_On'=> date('Y-m-d')
+        ];
+
+        if (!$model->update($id, $data)) {
+            return redirect()->back()->withInput()->with('error', 'Update failed.');
+        }
+
+        return redirect()->to('roles')->with('success', 'Role updated successfully.');
+    }
+
+    public function delete($id)
+    {
+        $model = new \App\Models\RoleModel();
+        $model->delete($id);
+        return redirect()->to(\site_url('roles'))->with('success', 'Roles deleted successfully.');
+    }
+
 }

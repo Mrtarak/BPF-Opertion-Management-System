@@ -15,16 +15,27 @@ class Center extends BaseController
         $this->centerModel = new CenterModel();
     }
 
+    public function view($id)
+{
+    $data['center'] = $this->centerModel->find($id);
+    
+    if (!$data['center']) {
+        return redirect()->to('/center')->with('error', 'Center not found');
+    }
+
+    return view('ManageCenter/view_center', $data);
+}
+
     public function index()
     {
     $centerName = $this->request->getGet('center_filter');
 
     if ($centerName) {
-        $data['centers'] = $this->centerModel
+        $data['center'] = $this->centerModel
             ->like('Center_Name', $centerName)
             ->findAll();
     } else {
-        $data['centers'] = $this->centerModel->findAll();
+        $data['center'] = $this->centerModel->findAll();
     }
 
     return view('ManageCenter/center', $data);    
@@ -40,8 +51,6 @@ class Center extends BaseController
         $data = [
             'Center_Id' => $this->request->getPost('Center_Id'),
             'Center_Name' => $this->request->getPost('Center_Name'),
-            'Center_Head_Id' => $this->request->getPost('Center_Head_Id'),
-            'Center_Coordinator' => $this->request->getPost('Center_Coordinator'),
             'Center_Status' => $this->request->getPost('Center_Status'),
             'Center_Description' => $this->request->getPost('Center_Description'),
             'Center_Inaugurated_By' => $this->request->getPost('Center_Inaugurated_By'),
@@ -50,11 +59,10 @@ class Center extends BaseController
             'Center_Address' => $this->request->getPost('Center_Address'),
             'Center_City' => $this->request->getPost('Center_City'),
             'Center_State'=> $this->request->getPost('Center_State'),
+            'Center_Pincode'=> $this->request->getPost('Center_Pincode'),
             'Center_Capacity' => $this->request->getPost('Center_Capacity'),
             'Rec_Added_By' => $this->request->getPost('Rec_Added_By'),
             'Rec_Added_On' => $this->request->getPost('Rec_Added_On') ?: date('Y-m-d'),
-            'Rec_Updated_By' => $this->request->getPost('Rec_Updated_By'),
-            'Rec_Last_Updated_On'=> $this->request->getPost('Rec_Updated_On') ?: date('Y-m-d'),
         ];
 
         $this->centerModel->save($data);

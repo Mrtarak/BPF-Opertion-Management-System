@@ -10,79 +10,111 @@
         <div class="card">
           <div class="card-body">
 
-            <button class="btn btn-secondary mb-3" onclick="window.history.back()">
-              <i class="mdi mdi-arrow-left"></i> Back
-            </button>
-
-            <nav aria-label="breadcrumb" class="mb-3">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo base_url('index'); ?>">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url('center'); ?>">Manage Center</a></li>
-              </ol>
-            </nav>
+          <?= view('includes/breadcrumb'); ?>
 
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="card-title mb-0">Center</h4>
-              <a href="<?php echo base_url('center/add'); ?>" class="btn btn-success btn-sm">
-                <i class="mdi mdi-account-plus"></i> Add New Center
-              </a>
-            </div>
-            <p class="card-description mb-3">Manage Center</p>
-            <div class="row mb-4">
-              <div class="col-md-4">
-                <form method="get" action="<?= site_url('center') ?>">
-                  <label for="centerSelect" class="form-label">Select Center</label>
-                  <select name="center_filter" id="centerSelect" class="form-select" onchange="this.form.submit()">
-                    <option value="">-- Select Center --</option>
-                    <?php if (isset($centers) && is_array($centers)) : ?>
-                      <?php foreach ($centers as $center) : ?>
-                        <option value="<?= strtolower(str_replace(' ', '_', $center['Center_Name'])) ?>" 
-                          <?= (isset($_GET['center_filter']) && $_GET['center_filter'] === strtolower(str_replace(' ', '_', $center['Center_Name']))) ? 'selected' : '' ?>>
-                          <?= $center['Center_Name'] ?>
-                        </option>
-                      <?php endforeach; ?>
-                    <?php endif; ?>
-                  </select>
-                </form>
-              </div>
-           </div>
-           <?php foreach ($centers as $center): ?>
-  <div class="center-details" data-center="<?= strtolower(str_replace(' ', '_', $center['Center_Name'])) ?>" style="display: <?= (isset($_GET['center_filter']) && $_GET['center_filter'] === strtolower(str_replace(' ', '_', $center['Center_Name']))) ? 'block' : 'none' ?>;">
-    <h5 class="mb-3">Center Details - <?= esc($center['Center_Name']) ?></h5>
-    <div class="row">
-      <div class="col-md-12"><strong>Center Name:</strong> <?= esc($center['Center_Name']) ?></div>
-      <div class="col-md-12"><strong>Center Head:</strong> <?= esc($center['Center_Head_Id']) ?></div>
-      <div class="col-md-12"><strong>Center Coordinator:</strong> <?= esc($center['Center_Coordinator']) ?></div>
-      <div class="col-md-12"><strong>Center Description:</strong> <?= esc($center['Center_Description']) ?></div>
-      <div class="col-md-12"><strong>Center Inaugurated By:</strong> <?= esc($center['Center_Inaugurated_By']) ?></div>
-      <div class="col-md-12"><strong>Center Head Contact:</strong> <?= esc($center['Center_Head_Contact']) ?></div>
-      <div class="col-md-12"><strong>Center Opening Date:</strong> <?= esc($center['Center_Opening_Date']) ?></div>
-      <div class="col-md-12"><strong>Center Address:</strong> <?= esc($center['Center_Address']) ?></div>
-      <div class="col-md-12"><strong>Center City:</strong> <?= esc($center['Center_City']) ?></div>
-      <div class="col-md-12"><strong>Center State:</strong> <?= esc($center['Center_State']) ?></div>
-      <div class="col-md-12"><strong>Center Capacity:</strong> <?= esc($center['Center_Capacity']) ?></div>
-      <div class="col-md-12"><strong>Recorded By:</strong> <?= esc($center['Rec_Added_By']) ?></div>
-      <div class="col-md-12"><strong>Recorded On:</strong> <?= esc($center['Rec_Added_On']) ?></div>
-      <div class="col-md-12"><strong>Status:</strong>
-        <label class="badge badge-<?= ($center['Center_Status'] === 'Active') ? 'success' : 'danger' ?>">
-          <?= esc($center['Center_Status']) ?>
-        </label>
-      </div>
-    </div>
-    <div class="mt-3">
-      <a href="<?= site_url('center/edit/' . $center['Center_Id']) ?>" class="btn btn-warning btn-sm" title="Edit">
-        <i class="mdi mdi-pencil"></i>
-      </a>
-      <a href="<?= site_url('center/delete/' . $center['Center_Id']) ?>" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure?');">
-        <i class="mdi mdi-delete"></i>
-      </a>
-    </div>
+  <h4 class="card-title mb-0">
+    <i class="mdi mdi-book-open-page-variant me-2"></i>Center List
+  </h4>
+  <div class="d-flex align-items-center">
+    <label for="statusFilter" class="me-2">Status:</label>
+    <select id="statusFilter" class="form-select me-3" style="width: 150px;">
+      <option value="">All</option>
+      <option value="Active">Active</option>
+      <option value="InActive">Inactive</option>
+      <option value="Completed">Completed</option>
+    </select>
+    <a href="<?php echo base_url('center/add'); ?>" class="btn btn-primary btn-sm">
+      <i class="mdi mdi-plus-circle-outline me-1"></i> Add New Center
+    </a>
   </div>
-<?php endforeach; ?>
-          <!-- content-wrapper ends -->
-        </div>
-        <!-- main-panel ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
-    </div>
+</div>
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="centerTable" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Center Name</th>
+                        <th>Inaugurated By</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Capacity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+  <?php if (!empty($center)): ?>
+    <?php $i = 1; foreach ($center as $row): ?>
+      <tr>
+        <td><?= $i++ ?></td>
+        <td><?= esc($row['Center_Name']) ?></td>
+        <td><?= esc($row['Center_Inaugurated_By']) ?></td>
+        <td><?= esc($row['Center_City']) ?></td>
+        <td><?= esc($row['Center_State']) ?></td>
+        <td><?= esc($row['Center_Capacity']) ?></td>
+        <td><?php
+    $status = $row['Center_Status'];
+    $badgeClass = match ($status) {
+        'Active' => 'badge bg-success text-white',    
+        'InActive' => 'badge bg-danger text-white',   
+        default => 'badge bg-secondary text-white',  
+    };
+?>
+<span class="<?= $badgeClass ?>"><?= esc($status) ?></span>
+</td>
+        <td>
+          <a href="<?= base_url('center/view/' . $row['Center_Id']) ?>" class="btn btn-info btn-sm"><i class="mdi mdi-eye"></i></a>
+          <a href="<?= base_url('center/edit/' . $row['Center_Id']) ?>" class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i></a>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  <?php else: ?>
+  <tr><td colspan="8" class="text-center">No centers found.</td></tr>
+<?php endif; ?>
+</tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
              <?= view('includes/footer'); ?>
+
+             <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var table = $('#centerTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      createdRow: function(row, data, dataIndex) {
+        // Store clean text in a data attribute
+        var statusText = $(row).find('td:eq(6)').text().trim();
+        $('td:eq(6)', row).attr('data-search', statusText);
+      },
+      columnDefs: [
+        {
+          targets: 4,
+          render: function(data, type, row) {
+            if (type === 'filter' || type === 'sort') {
+              return $('<div>').html(data).text().trim();
+            }
+            return data;
+          }
+        }
+      ]
+    });
+
+    // Status Filter - exact match using regex
+    $('#statusFilter').on('change', function() {
+      var selected = $(this).val();
+      table.column(6)
+           .search(selected ? '^' + selected + '$' : '', true, false) // exact match
+           .draw();
+    });
+  });
+</script>

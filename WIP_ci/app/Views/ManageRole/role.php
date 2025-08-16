@@ -21,20 +21,21 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= site_url('/') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Manage Role & Rights</li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Role </li>
               </ol>
             </nav>
 
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="card-title mb-0">Roles List</h4>
-              <a href="<?= site_url('roles/add') ?>" class="btn btn-success btn-sm">
-                <i class="mdi mdi-account-plus"></i> Add New Role
+              <h4 class="card-title mb-0"><i class="mdi mdi-book-open-page-variant me-2"></i>Roles List</h4>
+              <a href="<?php echo base_url ('roles/add'); ?>" class="btn btn-primary btn-sm">
+                <i class="mdi mdi-plus-circle-outline me-1"></i> Add New Role
               </a>
             </div>
-            <p class="card-description">Manage Different Roles</p>
-
-            <div class="table-responsive mb-5">
-              <table class="table table-bordered">
+            <div class="card">
+              <div class="card-body">
+            <div class="table-responsive ">
+              <table id="rolesTable" class="table table-striped">
                 <thead>
                   <tr>
                     <th>Role ID</th>
@@ -45,7 +46,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($roles as $role): ?>
+                  <?php if (!empty($roles)): ?>
+                  <?php $i=1; foreach ($roles as $role): ?>
                     <tr>
                       <td><?= esc($role['Role_Id']) ?></td>
                       <td><?= esc($role['Role_Name']) ?></td>
@@ -53,15 +55,15 @@
                       <td><?= esc($role['Rights_Summary'] ?? 'No Summary') ?></td>
                       <td>
                         <a href="<?= site_url('roles/edit/' . $role['Role_Id']) ?>" class="btn btn-warning btn-sm">
-                          <i class="mdi mdi-pencil"></i> Edit
+                          <i class="mdi mdi-pencil"></i> 
                         </a>
                         <a href="<?= site_url('roles/delete/' . $role['Role_Id']) ?>" onclick="return confirm('Delete role?')" class="btn btn-danger btn-sm">
-                          <i class="mdi mdi-delete"></i> Delete
+                          <i class="mdi mdi-delete"></i> 
                         </a>
                       </td>
                     </tr>
                   <?php endforeach; ?>
-                  <?php if (empty($roles)): ?>
+                  <?php else: ?>
                     <tr>
                       <td colspan="5" class="text-center">No roles found.</td>
                     </tr>
@@ -69,4 +71,22 @@
                 </tbody>
               </table>
             </div>
+            </div>
+                  </div>
+
+  <?= view('includes/footer'); ?>
+
+               <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#rolesTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true
+    });
+  });
+</script>
 

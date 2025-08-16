@@ -53,6 +53,14 @@ class Batch extends BaseController
         return redirect()->to(site_url('batches'))->with('success', 'Batch updated successfully');
     }
 
+public function view($id)
+{
+    $model = new \App\Models\BatchModel();
+    $batch = $model->find($id);
+    
+    return view('ManageBatches/view_batch', ['batch' => $batch]);
+}
+
     public function delete($id)
     {
         $this->batchModel->delete($id);

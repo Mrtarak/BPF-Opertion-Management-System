@@ -11,60 +11,72 @@
         <div class="card">
           <div class="card-body">
 
-            <!-- Back Button -->
-            <button class="btn btn-secondary mb-3" onclick="window.history.back()">
-              <i class="mdi mdi-arrow-left"></i> Back
-            </button>
-
-            <!-- Breadcrumb Navigation -->
-            <nav aria-label="breadcrumb" class="mb-3">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= site_url('/') ?>">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Manage Users</li>
-              </ol>
-            </nav>
+          <?= view('includes/breadcrumb'); ?>
 
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="card-title mb-0">User List</h4>
-              <a href="<?= site_url('users/add') ?>" class="btn btn-success btn-sm">
-                <i class="mdi mdi-account-plus"></i> Add New User
+              <h4 class="card-title mb-0"><i class="mdi mdi-book-open-page-variant me-2"></i>User List</h4>
+                <div class="d-flex align-items-center">
+    <label for="statusFilter" class="me-2">Status:</label>
+    <select id="statusFilter" class="form-select me-3" style="width: 150px;">
+      <option value="">All</option>
+      <option value="Active">Active</option>
+      <option value="InActive">Inactive</option>
+      <option value="Completed">Completed</option>
+    </select>
+    <label for="roleFilter" class="me-2">Role:</label>
+<select id="roleFilter" class="form-select me-3" style="width: 150px;">
+  <option value="">All</option>
+  <?php foreach ($roles as $role): ?>
+    <option value="<?= esc($role['Role_Name']) ?>"><?= esc($role['Role_Name']) ?></option>
+  <?php endforeach; ?>
+</select>
+              <a href="<?= site_url('users/add') ?>" class="btn btn-primary btn-sm">
+                <i class="mdi mdi-plus-circle-outline me-1"></i> Add New User
               </a>
             </div>
-            <p class="card-description">Manage Users from all programs</p>
-
+</div>
             <!-- Table -->
+                         <div class="card">
+              <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered">
+  <table id="userTable" class="table table-striped">
                 <thead>
                   <tr>
-                    <th>User ID</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>DOB</th>
-                    <th>Phone</th>
-                    <th>Aadhar No</th>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Program</th>
+                    <th>Location</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php if (!empty($users)): ?>
-                    <?php foreach ($users as $user): ?>
+                    <?php $i=1; foreach ($users as $user): ?>
                       <tr>
-                        <td><?= esc($user['User_Id']) ?></td>
+                        <td><?= $i++ ?></td>
                         <td><?= esc($user['User_FirstName'] . ' ' . $user['User_LastName']) ?></td>
-                        <td><?= esc($user['User_Gender']) ?></td>
-                        <td><?= date('d M Y', strtotime($user['User_DOB'])) ?></td>
-                        <td><?= esc($user['User_Phone_No']) ?></td>
-                        <td><?= esc($user['User_Aadhar_No']) ?></td>
+                        <td><?= esc($user['User_Login_MailID']) ?></td>
+                        <td><?= esc($user['Role_Name']) ?></td>
+                        <td><?= esc($user['Program_Name']) ?></td>
+                        <td><?= esc($user['User_Village_City'] . ',' . $user['User_State']) ?></td>
                         <td>
-                          <?php if ($user['User_Status'] == 'Active'): ?>
-                            <label class="badge badge-success">Active</label>
-                          <?php else: ?>
-                            <label class="badge badge-danger">Inactive</label>
-                          <?php endif; ?>
-                        </td>
+  <?php
+    $status = $user['User_Status'];
+    $color = match ($status) {
+        'Active' => '#28a745',
+        'InActive' => '#dc3545',
+        'Completed' => '#ffc107',
+        default => '#6c757d',
+    };
+  ?>
+  <span style="background-color: <?= $color ?>; color: white; padding: 5px 10px; border-radius: 5px;">
+    <?= esc($status) ?>
+  </span>
+</td>
                         <td>
                           <a href="<?= site_url('users/view/' . $user['User_Id']) ?>" class="btn btn-info btn-sm" title="View">
                             <i class="mdi mdi-eye"></i>
@@ -86,11 +98,46 @@
                 </tbody>
               </table>
             </div>
-
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-             <?= view('includes/footer'); ?>
+
+        <?= view('includes/footer'); ?>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var table = $('#userTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      columnDefs: [
+        {
+          targets: 6, // Status column
+          render: function(data, type, row) {
+            if (type === 'filter' || type === 'sort') {
+              return $('<div>').html(data).text().trim(); // strip HTML for sorting/filter
+            }
+            return data; // otherwise, return HTML for display
+          }
+        }
+      ]
+    });
+
+    // Status Filter
+    $('#statusFilter').on('change', function() {
+      var selected = $(this).val();
+      table.column(6)
+           .search(selected ? '^' + selected + '$' : '', true, false) // exact match with regex
+           .draw();
+    });
+    // role filter
+    $('#roleFilter').on('change', function() {
+  let selected = $(this).val();
+  table.column(3)  // Role column index
+       .search(selected ? '^' + selected + '$' : '', true, false)
+       .draw();
+});
+  });
+</script>

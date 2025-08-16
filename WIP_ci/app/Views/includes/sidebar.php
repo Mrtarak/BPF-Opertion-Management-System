@@ -5,15 +5,31 @@
     <li class="nav-item">
       <a class="nav-link" href="<?= site_url('/') ?>">
         <i class="mdi mdi-grid-large menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">Home</span>
       </a>
     </li>
 
     <!-- Settings (Only for Super-Admin) -->
-    <li class="nav-item nav-category">Settings (Super Admin)</li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('programs') ?>"><i class="mdi mdi-folder-multiple menu-icon"></i><span class="menu-title">Manage Programs</span></a></li>
+    <li class="nav-item nav-category">SETTINGS </li>
+
+    <!-- Manage programs -->
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#programs" aria-expanded="false" aria-controls="programs">
+        <i class="mdi mdi-folder-multiple menu-icon"></i>
+        <span class="menu-title">Manage Programs</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="programs">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="<?= site_url('programs') ?>">Manage Programs</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= site_url('program_theme') ?>">Manage Program Themes</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Manage centers -->
     <li class="nav-item"><a class="nav-link" href="<?= site_url('center') ?>"><i class="mdi mdi-map-marker-radius menu-icon"></i><span class="menu-title">Manage Centers</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('users') ?>"><i class="mdi mdi-account-circle menu-icon"></i><span class="menu-title">Manage Users</span></a></li>
+
     <!-- Roles & Rights -->
      <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#rolesRights" aria-expanded="false" aria-controls="rolesRights">
@@ -32,83 +48,144 @@
       </ul>
      </div>
         </li>
-        <!-- Goal Types -->
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#goalMenu" aria-expanded="false" aria-controls="goalMenu">
-    <i class="mdi mdi-calendar-multiselect menu-icon"></i>
-    <span class="menu-title">Manage Goals</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="goalMenu">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals') ?>">All Goals</a></li>
-      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals/types') ?>">Manage Goals Types</a></li>
-    </ul>
-  </div>
-</li>
 
-    <!-- Programs Dropdown -->
-    <li class="nav-item nav-category">Programs</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#programsSubmenu" aria-expanded="false" aria-controls="programsSubmenu">
+      <!-- Manage Goal Types -->
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('goals/types') ?>"><i class="mdi mdi-calendar-multiselect menu-icon"></i><span class="menu-title">Manage GoalTypes</span></a></li>
+      
+      <!-- Manage Expense Heads -->
+     <li class="nav-item"><a class="nav-link" href="<?= site_url('expense_heads') ?>"><i class="mdi mdi-currency-inr menu-icon"></i><span class="menu-title">Expense Heads</span></a></li>
+     
+     <!-- manage EventTypes -->
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('eventtype') ?>"><i class="mdi mdi-calendar-multiselect menu-icon"></i><span class="menu-title">EventTypes</span></a></li>
+    
+    <!-- Manage Batches -->
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('batches') ?>"><i class="mdi mdi-calendar-clock menu-icon"></i><span class="menu-title">Manage Batches</span></a></li>
+
+    <!-- Manage Users Dropdown -->
+    <li class="nav-item nav-category">Manage Users</li>
+      <!-- Manage User -->
+           <li class="nav-item"><a class="nav-link" href="<?= site_url('users') ?>"><i class="mdi mdi-account-circle menu-icon"></i><span class="menu-title">Manage Users</span></a></li>
+
+<!-- Manage Students -->
+<li class="nav-item">
+    <a class="nav-link" data-bs-toggle="collapse" href="#programsSubmenu" aria-expanded="false" aria-controls="programsSubmenu">
         <i class="mdi mdi-book-multiple menu-icon"></i>
         <span class="menu-title">Manage Students</span>
         <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="programsSubmenu">
+    </a>
+    <div class="collapse" id="programsSubmenu">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/vijetaas') ?>">Vijetaas</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/doosra_mauka') ?>">Doosra Mauka Students</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/learning_adda') ?>">Learning Adda Students</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= site_url('students/digital_shakti') ?>">Digital Shakti Students</a></li>
+
+            <!-- Vijetaas main with sub-links -->
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#vijetaasSubmenu" aria-expanded="false" aria-controls="vijetaasSubmenu">
+                    Vijetaas
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="vijetaasSubmenu">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="<?= site_url('students/vijetaas') ?>">All Vijetaas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= site_url('students/vijetaas/goals') ?>">Goals</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= site_url('students/vijetaas/results') ?>">Results</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Other programs -->
+            <li class="nav-item"><a class="nav-link" href="<?= site_url('students/doosra_mauka') ?>">Doosra Mauka Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= site_url('students/learning_adda') ?>">Learning Adda Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= site_url('students/digital_shakti') ?>">Digital Shakti Students</a></li>
         </ul>
-      </div>
-    </li>
-
-    <!-- Coordinators -->
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('coordinators') ?>"><i class="mdi mdi-account-tie menu-icon"></i><span class="menu-title">Manage Coordinators</span></a></li>
-
-    <!-- Batches -->
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('batches') ?>"><i class="mdi mdi-calendar-clock menu-icon"></i><span class="menu-title">Manage Batches</span></a></li>
-
-    <!-- Events -->
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#eventMenu" aria-expanded="false" aria-controls="eventMenu">
-    <i class="mdi mdi-calendar-multiselect menu-icon"></i>
-    <span class="menu-title">Manage Events</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="eventMenu">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item"><a class="nav-link" href="<?= site_url('events/list') ?>">All Events</a></li>
-      <li class="nav-item"><a class="nav-link" href="<?= site_url('events/types') ?>">Manage Event Types</a></li>
-    </ul>
-  </div>
+    </div>
 </li>
 
-    <!-- Finance -->
-    <li class="nav-item nav-category">Manage Finance</li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/fees') ?>"><i class="mdi mdi-cash-multiple menu-icon"></i><span class="menu-title">Fees</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/donations') ?>"><i class="mdi mdi-currency-inr menu-icon"></i><span class="menu-title">Donations</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/salary') ?>"><i class="mdi mdi-bank menu-icon"></i><span class="menu-title">Salaries</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/assets') ?>"><i class="mdi mdi-package-variant menu-icon"></i><span class="menu-title">Assets</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/expenses') ?>"><i class="mdi mdi-cash-minus menu-icon"></i><span class="menu-title">Expenses</span></a></li>
+        <!-- Manage Monthly Activity Uploads -->
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('uploads') ?>"><i class="mdi mdi-upload menu-icon"></i><span class="menu-title"> Monthly Uploads</span></a></li>
 
-
-    <!-- Donors -->
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('donors') ?>"><i class="mdi mdi-hand-heart menu-icon"></i><span class="menu-title">Manage Donors</span></a></li>
+    
+    <li class="nav-item nav-category">Others</li>
 
     <!-- Attendance -->
     <li class="nav-item"><a class="nav-link" href="<?= site_url('attendance') ?>"><i class="mdi mdi-calendar-check menu-icon"></i><span class="menu-title">Manage Attendance</span></a></li>
 
+    <!-- Events -->
+     <li class="nav-item"><a href="<?= site_url('events') ?>" class="nav-link"><i class=" mdi mdi-calendar-multiple menu-icon"></i><p>All Events</p></a></li>
+    <!-- Finance -->
+    <li class="nav-item nav-category">Manage Finance</li>
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/fees') ?>"><i class="mdi mdi-cash-multiple menu-icon"></i><span class="menu-title">Fees</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/donations') ?>"><i class="mdi mdi-currency-inr menu-icon"></i><span class="menu-title">Donations</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/assets') ?>"><i class="mdi mdi-package-variant menu-icon"></i><span class="menu-title">Assets</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="<?= site_url('finance/expenses') ?>"><i class="mdi mdi-cash-minus menu-icon"></i><span class="menu-title">Expenses</span></a></li>
+
     <!-- Reports -->
     <li class="nav-item nav-category">Reports</li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/program') ?>"><i class="mdi mdi-chart-bar menu-icon"></i><span class="menu-title">Programs Report</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/student') ?>"><i class="mdi mdi-account-search menu-icon"></i><span class="menu-title">Student Report</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/coordinators') ?>"><i class="mdi mdi-account-search menu-icon"></i><span class="menu-title">Coordinators Report</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/donor') ?>"><i class="mdi mdi-account-search menu-icon"></i><span class="menu-title">Donor Report</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/finance') ?>"><i class="mdi mdi-finance menu-icon"></i><span class="menu-title">Finance Reports</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/event') ?>"><i class="mdi mdi-calendar-text menu-icon"></i><span class="menu-title">Event Reports</span></a></li>
+    <!-- Program Performance Reports -->
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#programPerformanceReports" aria-expanded="false" aria-controls="programPerformanceReports">
+    <i class="mdi mdi-chart-bar menu-icon"></i>
+    <span class="menu-title">Program Performance Reports</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="programPerformanceReports">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/program_summary') ?>">Program Summary Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/enrollment_completion') ?>">Program Enrollment & Completion Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/program_attendance') ?>">Program Attendance Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/completion_rate') ?>">Completion Rate Report</a></li>
+    </ul>
+  </div>
+</li>
+
+<!-- Financial Reports -->
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#financialReports" aria-expanded="false" aria-controls="financialReports">
+    <i class="mdi mdi-currency-inr menu-icon"></i>
+    <span class="menu-title">Financial Reports</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="financialReports">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/fees_collection') ?>">Fees Collection Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/expenditure') ?>">Expenditure Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/donation') ?>">Donation Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/spend_vs_donation') ?>">Spend vs Donation Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/budget_planning') ?>">Budget Planning Report</a></li>
+    </ul>
+  </div>
+</li>
+
+<!-- Operational & Resource Reports -->
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#operationalReports" aria-expanded="false" aria-controls="operationalReports">
+    <i class="mdi mdi-domain menu-icon"></i>
+    <span class="menu-title">Operational & Resource Reports</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="operationalReports">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/center_event_summary') ?>">Center & Event Summary Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/asset_utilization') ?>">Asset Utilization Report</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/event_details') ?>">Event Details Report</a></li>
+    </ul>
+  </div>
+</li>
+
+<!-- KPI Dashboards -->
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#kpiDashboards" aria-expanded="false" aria-controls="kpiDashboards">
+    <i class="mdi mdi-monitor-dashboard menu-icon"></i>
+    <span class="menu-title">KPI Dashboards</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="kpiDashboards">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/program_kpi') ?>">Program KPI Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/attendance_kpi') ?>">Attendance KPI Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/financial_kpi') ?>">Financial KPI Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="<?= site_url('reports/coordinator_kpi') ?>">Coordinator KPI Dashboard</a></li>
+    </ul>
+  </div>
+</li>
 
     <!-- Results -->
     <li class="nav-item nav-category">Results</li>

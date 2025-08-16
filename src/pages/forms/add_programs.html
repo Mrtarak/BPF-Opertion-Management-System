@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+
   </head>
   <body>
     <div class="container-scroller">
@@ -50,53 +53,6 @@
             </li>
           </ul>
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown d-none d-lg-block">
-              <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-                <a class="dropdown-item py-3">
-                  <p class="mb-0 fw-medium float-start">Select category</p>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">Bootstrap Bundle </p>
-                    <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">Angular Bundle</p>
-                    <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">VUE Bundle</p>
-                    <p class="fw-light small-text mb-0">Bundle of 6 Premium Vue Admin Dashboard</p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">React Bundle</p>
-                    <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="nav-item d-none d-lg-block">
-              <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-                <span class="input-group-addon input-group-prepend border-right">
-                  <span class="icon-calendar input-group-text calendar-icon"></span>
-                </span>
-                <input type="text" class="form-control">
-              </div>
-            </li>
-            <li class="nav-item">
-              <form class="search-form" action="#">
-                <i class="icon-search"></i>
-                <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-              </form>
-            </li>
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                 <i class="icon-bell"></i>
@@ -136,45 +92,6 @@
                 </a>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="icon-mail icon-lg"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
-                <a class="dropdown-item py-3">
-                  <p class="mb-0 fw-medium float-start">You have 7 unread mails </p>
-                  <span class="badge badge-pill badge-primary float-end">View all</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="../../assets/images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
-                  </div>
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
-                    <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="../../assets/images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
-                  </div>
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
-                    <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="../../assets/images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
-                  </div>
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
-                    <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                  </div>
-                </a>
-              </div>
-            </li>
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">
               <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <img class="img-xs rounded-circle" src="../../assets/images/faces/face8.jpg" alt="Profile image"> </a>
@@ -185,9 +102,6 @@
                   <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
                 </div>
                 <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
                 <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
               </div>
             </li>
@@ -205,7 +119,7 @@
             <li class="nav-item">
               <a class="nav-link" href="../../../index.html">
                 <i class="mdi mdi-grid-large menu-icon"></i>
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title">Home</span>
               </a>
             </li>
             
@@ -333,30 +247,22 @@
                     <!-- breadcrumb navigation -->
                     <nav aria-label="breadcrumb" class="mb-3">
                       <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../../index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item">Manage Programs</li>
+                        <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="../../pages/manage/programs.html">Manage Programs</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Add Programs</li>
                       </ol>
                     </nav>
                     <h4 class="card-title"> Programs</h4>
                     <p class="card-description">Add Programs </p>
-                    <form class="forms-sample">
+                    <form id="programForm" class="forms-sample" onsubmit="return validateProgramForm()" method="POST" action="../manage/programs.html">
 
                          <div class="row">
                            <div class="col-md-6 form-group">
-                             <label>Program Name</label>
-                             <input type="text" class="form-control" placeholder="Enter Program Name">
+                             <label>Program Name <span class="text-danger">*</span></label>
+                             <input type="text" class="form-control form-lg" placeholder="Enter Program Name">
                            </div>
                            <div class="col-md-6 form-group">
-                             <label>About</label>
-                             <input type="text" class="form-control" placeholder="Enter About Program">
-                           </div>
-                        <div class="col-md-6 form-group">
-                          <label>Start Date</label>
-                          <input type="date" class="form-control">
-                        </div>
-                          <div class="col-md-6 form-group">
-                            <label>Program Theme</label>
+                            <label>Program Theme <span class="text-danger">*</span></label>
                             <select class="form-select">
                               <option value="">Select Theme</option>
                               <option>Employability</option>
@@ -365,16 +271,24 @@
                               <option>Well-being</option>
                             </select>
                           </div>
-                          <div class="col-md-6 form-group">
-                            <label>Coordinator</label>
-                            <input type="text" class="form-control" placeholder="Enter Coordinator Name">
-                          </div>
-                          <div class="col-md-6 form-group">
-                            <label>Applicable For</label>
+                           <div class="col-md-12 form-group">
+                             <label>About <span class="text-danger">*</span></label>
+                             <input type="text" class="form-control form-xl" placeholder="Enter About Program">
+                           </div>
+                        <div class="col-md-6 form-group">
+                          <label>Start Date <span class="text-danger">*</span></label>
+                          <input type="date" class="form-control">
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <label>End Date</label>
+                          <input type="date" class="form-control">
+                        </div>
+                          <div class="col-md-12 form-group">
+                            <label>Applicable For <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" placeholder="Enter Age Group">
                           </div>
                           <div class="col-md-6 form-group">
-                            <label>Status</label>
+                            <label>Status <span class="text-danger">*</span></label>
                             <select class="form-select">
                               <option value="">Select Status</option>
                               <option>Active</option>
@@ -419,6 +333,7 @@
     <script src="../../assets/js/file-upload.js"></script>
     <script src="../../assets/js/typeahead.js"></script>
     <script src="../../assets/js/select2.js"></script>
+    <script src="../../assets/js/validations.js"></script>
     <!-- End custom js for this page-->
   </body>
 </html>

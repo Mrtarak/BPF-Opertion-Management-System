@@ -18,5 +18,11 @@ class UserModel extends Model{
 ];
 
     protected $useTimestamps = false;
-
+public function getUsersWithRoleAndProgram()
+{
+    return $this->select('user_m.*, role_m.Role_Name, program_m.Program_Name')
+                ->join('role_m', 'role_m.Role_Id = user_m.Role_Id', 'left')
+                ->join('program_m', 'program_m.Program_Id = user_m.Program_Id', 'left')
+                ->findAll();
+}
 }

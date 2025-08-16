@@ -1,58 +1,18 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\EventTypeModel;
 use App\Models\EventDetailModel;
 
 class Event extends BaseController
 {
-    protected $eventTypeModel;
     protected $eventModel;
 
     public function __construct()
     {
-        $this->eventTypeModel = new EventTypeModel();
         $this->eventModel = new EventDetailModel();
         helper(['form']);
     }
 
-    // ----------- EVENT TYPES ------------
-    public function eventTypes()
-    {
-        $data['types'] = $this->eventTypeModel->findAll();
-        return view('ManageEvents/event_type', $data);
-    }
-
-    public function addEventType()
-    {
-        return view('ManageEvents/add_event_type');
-    }
-
-    public function saveEventType()
-    {
-        $this->eventTypeModel->insert($this->request->getPost());
-        return redirect()->to('events/types')->with('success', 'Event Type Added');
-    }
-
-    public function editEventType($id)
-    {
-        $data['type'] = $this->eventTypeModel->find($id);
-        return view('ManageEvents/edit_event_type', $data);
-    }
-
-    public function updateEventType($id)
-    {
-        $this->eventTypeModel->update($id, $this->request->getPost());
-        return redirect()->to('events/types')->with('success', 'Event Type Updated');
-    }
-
-    public function deleteEventType($id)
-    {
-        $this->eventTypeModel->delete($id);
-        return redirect()->to('events/types')->with('success', 'Event Type Deleted');
-    }
-
-    // ----------- EVENT DETAILS ------------
     public function eventList()
     {
         $data['events'] = $this->eventModel

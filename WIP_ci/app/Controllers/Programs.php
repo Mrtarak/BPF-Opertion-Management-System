@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\ProgramModel;
-use Config\Validation\Programvalidation;
+use App\Models\ProgramThemeModel;
 
 class Programs extends BaseController
 {
@@ -16,48 +16,53 @@ class Programs extends BaseController
         $this->programModel = new ProgramModel();
     }
 
+    public function view($id)
+{
+    $program = $this->programModel
+        ->select('PROGRAM_M.*, PROGRAM_THEME_M.Program_Theme_Name')
+        ->join('PROGRAM_THEME_M', 'PROGRAM_THEME_M.Program_Theme_Id = PROGRAM_M.Program_Theme_Id', 'left')
+        ->where('PROGRAM_M.Program_Id', $id)
+        ->first();
+    
+    if (!$program) {
+        return redirect()->to('/programs')->with('error', 'Program not found');
+    }
+
+    return view('ManagePrograms/view_program', ['program' => $program]);
+}
+
     public function index()
     {
     $programName = $this->request->getGet('program_filter');
 
+    $query = $this->programModel
+        ->select('PROGRAM_M.*, PROGRAM_THEME_M.Program_Theme_Name')
+        ->join('PROGRAM_THEME_M', 'PROGRAM_THEME_M.Program_Theme_Id = PROGRAM_M.Program_Theme_Id', 'left');
+
     if ($programName) {
-        $data['programs'] = $this->programModel
-            ->where('LOWER(REPLACE(Program_Name, " ", "_"))', strtolower($programName))
-            ->findAll();
-    } else {
-        $data['programs'] = $this->programModel->findAll();
+        $query->like('Program_Name', $programName);
     }
 
-    return view('programs', $data);    
+    $data['programs'] = $query->findAll();
+
+    return view('ManagePrograms/programs', $data);
     }
 
     public function add()
     {
-        return view('add_programs');
+        $themeModel = new ProgramThemeModel();
+    $themes = $themeModel->findAll();
+        return view('ManagePrograms/add_programs', ['themes' => $themes]);
     }
 
     public function store()
     {
-        $validation = \Config\Services::validation();
+        helper(['form']);
 
-        if (!$this->validate(ProgramValidation::$programRules)){
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
-
-        $programId = 'PROG_' . uniqid();
-        if (!$this->validate([
-            'Program_Name' => 'required',
-            'Program_About' => 'required',
-            'Program_Start_Date' => 'required',
-            'Program_Theme_Id' => 'required',
-            'Applicable_For' => 'required',
-            'Rec_Added_By' => 'required',
-        ])) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
+    $model = new ProgramModel();
 
         $data = [
-            'Program_Id' => $programId,
+            'Program_Id' => 'PROG_' . uniqid(),
             'Program_Name' => $this->request->getPost('Program_Name'),
             'Program_About' => $this->request->getPost('Program_About'),
             'Program_Start_Date' => $this->request->getPost('Program_Start_Date'),
@@ -65,50 +70,62 @@ class Programs extends BaseController
             'Program_Theme_Id' => $this->request->getPost('Program_Theme_Id'),
             'Applicable_For' => $this->request->getPost('Applicable_For'),
             'Program_Status' => $this->request->getPost('Program_Status'),
-            'Rec_Added_By'       => $this->request->getPost('Rec_Added_By'),
-            'Rec_Added_On'       => $this->request->getPost('Rec_Added_On') ?: date('Y-m-d'),
-        'Rec_Updated_By'     => $this->request->getPost('Rec_Updated_By'),
-        'Rec_Last_Updated_On'=> $this->request->getPost('Rec_Updated_On') ?: date('Y-m-d'),
+            'Rec_Added_By'       => session()->get('user_id'),  
+            'Rec_Added_On'       => date('Y-m-d')
         ];
 
-        $this->programModel->save($data);
-        return redirect()->to('/programs')->with('success', 'Program added successfully');
+        if (!$model->insert($data)) {
+        log_message('error', 'Program insert failed: ' . json_encode($model->errors()));
+        return redirect()->back()->withInput()->with('error', 'Insert failed. Please check logs.');
     }
+    return redirect()->to(site_url('programs'))->with('success', 'Program added successfully');
+}
 
     public function edit($id)
-    {
-        $data['program'] = $this->programModel->find($id);
-        if (!$data['program']) {
-            return redirect()->to('/programs')->with('error', 'Program not found');
-        }
-        return view('edit_programs', $data);
+{
+    $programModel = new ProgramModel();
+    $program = $programModel->find($id); 
+
+    if (!$program) {
+        return redirect()->to('/programs')->with('error', 'Program not found.');
     }
+
+    $themeModel = new ProgramThemeModel();
+    $themes = $themeModel->findAll();
+    return view('ManagePrograms/edit_programs', [
+        'program' => $program,
+        'themes' => $themes
+    ]);
+}
+
 
     public function update($id)
     {
-        $validation = \Config\Services::validation();
+        log_message('debug', 'Inside update function for ID: ' . $id);
 
-        if (!$this->validate(ProgramValidation::$programRules)){
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
+        helper(['form']);
 
-        if (!$this->programModel->find($id)) {
-            return redirect()->to('/programs')->with('error', 'Program not found');
-        }
+    $model = new ProgramModel();
 
         $data = [
             'Program_Name' => $this->request->getPost('Program_Name'),
-            'About' => $this->request->getPost('About'),
-            'Start_Date' => $this->request->getPost('Start_Date'),
-            'End_Date' => $this->request->getPost('End_Date'),
+            'Program_About' => $this->request->getPost('Program_About'),
+            'Program_Start_Date' => $this->request->getPost('Program_Start_Date'),
+            'Program_End_Date' => $this->request->getPost('Program_End_Date'),
             'Program_Theme_Id' => $this->request->getPost('Program_Theme_Id'),
             'Applicable_For' => $this->request->getPost('Applicable_For'),
             'Program_Status' => $this->request->getPost('Program_Status'),
+            'Rec_Updated_By'     => session()->get('user_id') ?? 'system',
+            'Rec_Last_Updated_On'=> date('Y-m-d')
         ];
 
-        $this->programModel->update($id, $data);
-        return redirect()->to('/programs')->with('success', 'Program updated successfully');
+        if (!$model->update($id, $data)) {
+        log_message('error', 'Update failed: ' . json_encode($model->errors()));
+        return redirect()->back()->withInput()->with('error', 'Update failed.');
     }
+        return redirect()->to('/programs')->with('success', 'Program updated successfully!');
+
+}
 
     public function delete($id)
     {
@@ -118,4 +135,7 @@ class Programs extends BaseController
         $this->programModel->delete($id);
         return redirect()->to('/programs')->with('success', 'Program deleted successfully');
     }
+
+
+
 }

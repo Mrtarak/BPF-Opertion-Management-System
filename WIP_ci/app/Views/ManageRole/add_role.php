@@ -20,13 +20,14 @@
               <nav aria-label="breadcrumb" class="mb-3">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url('users'); ?>">Manage Roles</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add New Role</li>
+                <li class="breadcrumb-item" aria-current="page">Manage Role & Rights</li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url('roles'); ?>">Manage Roles</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add New Role</li>
                 </ol>
               </nav>
 
                <h4 class="card-title">Roles</h4>
-<p class="card-description">Add New Role</p>
+               <p class="card-description">Add New Role</p>
 
         <form method="post" action="<?= site_url('roles/store') ?>">
           <div class="row">
@@ -65,19 +66,8 @@
       <input type="date" name="Rec_Added_On" class="form-control" value="<?= old('Rec_Added_On') ?>">
     </div>
 
-    <div class="col-md-6 form-group">
-      <label>Updated By</label>
-      <input type="text" name="Rec_Updated_By" class="form-control" value="<?= old('Rec_Updated_By') ?>" placeholder="Enter Who Updated Record" >
-    </div>
-
-    <div class="col-md-6 form-group">
-      <label>Last Updated On</label>
-      <input type="date" name="Rec_Last_Updated_On" class="form-control" value="<?= old('Rec_Last_Updated_On') ?>">
-    </div>
-  </div>
-
   <div class="mt-4">
-    <a href="<?= site_url('programs') ?>" class="btn btn-light">Cancel</a>
+    <a href="<?= site_url('roles') ?>" class="btn btn-light">Cancel</a>
     <button type="submit" class="btn btn-primary me-2">Save</button>
   </div>
                   </form>
@@ -88,3 +78,4 @@
   </div>
 </div>
 
+  <?= view('includes/footer'); ?>

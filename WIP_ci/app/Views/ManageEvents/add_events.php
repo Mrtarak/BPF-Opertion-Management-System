@@ -11,19 +11,7 @@
         <div class="card">
           <div class="card-body">
 
-            <!-- Back Button -->
-              <button class="btn btn-secondary mb-3" onclick="window.history.back()">
-                <i class="mdi mdi-arrow-left"></i> Back
-              </button>
-
-              <!-- Breadcrumb -->
-              <nav aria-label="breadcrumb" class="mb-3">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url('ManageEvents/events'); ?>">Manage Events</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add Event</li>
-                </ol>
-              </nav>
+          <?= view('includes/breadcrumb'); ?>
 
 
             <h4 class="card-title">Add New Event</h4>
